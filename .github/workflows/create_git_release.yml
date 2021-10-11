@@ -1,11 +1,11 @@
 name: Create Release
- 
- on:
+
+on:
    push:
      branches:
        - main
  
- jobs:
+jobs:
    create_git_tag:
      runs-on: ubuntu-latest
      steps:
