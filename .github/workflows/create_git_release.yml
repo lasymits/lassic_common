@@ -24,7 +24,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ steps.create-tag.outputs.tag-name }}
-          release_name: Release/${{ TZ=Asia/Tokyo date +%Y%m%d }}
+          run: 
+            echo "$(TZ=Asia/Tokyo date +%Y%m%d)" > RELEASE_NAME
+          release_name: Release/${{ RELEASE_NAME }}
           body: |
             Changes in this Release
             - First Change
