@@ -26,7 +26,8 @@ jobs:
           tag_name: ${{ steps.create-tag.outputs.tag-name }}
           run: 
             echo "$(TZ=Asia/Tokyo date +%Y%m%d)" > RELEASE_NAME
-          release_name: Release/${{ RELEASE_NAME }}
+            echo "::set-output name=release-name::$(cat RELEASE_NAME)"
+          release_name: Release/${{ steps.create-tag.outputs.release-name }}
           body: |
             Changes in this Release
             - First Change
