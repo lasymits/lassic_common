@@ -13,7 +13,7 @@ jobs:
       - name: Create Tag
         id: create-tag
         run: |
-          echo "$(TZ=Asia/Tokyo date +%Y%m%d)_01" > TAG_NAME
+          echo "$(TZ=Asia/Tokyo date +%Y%m%d)" > TAG_NAME
           git tag $(cat TAG_NAME)
           git push origin $(cat TAG_NAME)
           echo "::set-output name=tag-name::$(cat TAG_NAME)"
@@ -24,10 +24,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ steps.create-tag.outputs.tag-name }}
-          run: 
-            echo "$(TZ=Asia/Tokyo date +%Y%m%d)" > RELEASE_NAME
-            echo "::set-output name=release-name::$(cat RELEASE_NAME)"
-          release_name: Release/${{ steps.create-tag.outputs.release-name }}
+          release_name: Release/${{ steps.create-tag.outputs.tag-name }}
           body: |
             Changes in this Release
             - First Change
