@@ -1,0 +1,19 @@
+name: Create Tag
+ 
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  create_git_tag:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Create Tag
+        id: create-tag
+        run: |
+          echo "$(TZ=Asia/Tokyo date +%Y%m%d_%H%M)" > TAG_NAME
+          git tag $(cat TAG_NAME)
+          git push origin $(cat TAG_NAME)
+          echo "::set-output name=tag-name::$(cat TAG_NAME)"
