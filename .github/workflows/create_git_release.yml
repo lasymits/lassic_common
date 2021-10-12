@@ -13,7 +13,7 @@ jobs:
       - name: Create Tag
         id: create-tag
         run: |
-          echo "$(TZ=Asia/Tokyo date +%Y%m%d_%H%M%S)" > TAG_NAME
+          echo "$(TZ=Asia/Tokyo date +%Y%m%d_%H%M)" > TAG_NAME
           git tag $(cat TAG_NAME)
           git push origin $(cat TAG_NAME)
           echo "::set-output name=tag-name::$(cat TAG_NAME)"
